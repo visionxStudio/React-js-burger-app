@@ -1,3 +1,6 @@
+import firebase from 'firebase';
+
+
 const config = {
     apiKey: "AIzaSyBa7-jsXWStZGXXJ_OSzbWjuC8j_tg58T0",
     authDomain: "techsansaar-bd473.firebaseapp.com",
@@ -9,4 +12,6 @@ const config = {
     measurementId: "G-D64DHJ0Z0M"
   };
 
-  export default config;
+  const fire = firebase.initializeApp(config);
+
+  export default fire;
