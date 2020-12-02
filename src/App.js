@@ -2,6 +2,7 @@ import React, { useState, useEffect }  from 'react';
 import './App.css';
 import Login from './components/Auth/Login/Login'
 import fire from './config/firebaseConfig';
+import Home from './components/Home/Home';
 
 function App() {
   const [user, setUser] = useState('');
@@ -9,7 +10,7 @@ function App() {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setpasswordError] = useState('');
-  const [hasAccount, sethasAccount] = useState(false);
+  const [hasAccount, setHasAccount] = useState(true);
 
   const clearInputs = () => {
     setEmail("");
@@ -34,7 +35,9 @@ function App() {
         case "auth/wrong-password":
            setpasswordError(err.message);
            break;
-
+default: 
+setEmailError("something Went Wrong");
+setpasswordError("something Went Wrong");
       }
     })
   }
@@ -52,7 +55,9 @@ function App() {
         case "auth/weak-password":
            setpasswordError(err.message);
            break;
-
+           default: 
+           setEmailError("something Went Wrong");
+           setpasswordError("something Went Wrong");
       }
     })
   }
@@ -81,7 +86,23 @@ function App() {
 
   return (
     <div className="App">
-      <Login> </Login>
+      {!user ? (
+        <Login
+        email = {email}
+        setEmail = {setEmail}
+        password = {password}
+        setPassword = {setPassword}
+        handleLogin = {handleLogin}
+        handleSignup = {handleSignup}
+        hasAccount = {hasAccount}
+        setHasAccount = {setHasAccount}
+        emailError = {emailError}
+        passwordError = {passwordError}
+      />
+      ) : (
+<Home logout = {handleLogout}/>
+      )}
+      
     </div>
   );
 }
